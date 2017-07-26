@@ -1,14 +1,11 @@
+import socket
 import subprocess
 import unittest
-import os
-import signal
-import psutil
-from time import sleep
-from appium import webdriver
-import socket
 from contextlib import closing
-import cmd
-import sys
+from time import sleep
+import psutil
+from appium import webdriver
+
 
 class CommonFunctions(unittest.TestCase):
 
@@ -21,7 +18,7 @@ class CommonFunctions(unittest.TestCase):
             else:
                 return False
 
-    def setUp(self):
+    def setUpBase(self):
         sleep(5)
         chksession = CommonFunctions.check_socket("127.0.0.1",4723)
         if chksession == False:
@@ -42,7 +39,7 @@ class CommonFunctions(unittest.TestCase):
                 proc.kill()
             process.kill()
 
-    def tearDown(self):
+    def tearDownBase(self):
         sleep(5)
         self.driver.quit()
         CommonFunctions.kill(self.process.pid)
