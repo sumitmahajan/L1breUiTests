@@ -3,17 +3,23 @@ import LibreAutomation.Common.CommonFunctions as cf
 
 
 class DriverTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(DriverTests, cls).setUpClass()
+        cf.CommonFunctions.setUpBase(self=DriverTests)
 
-    def setUp(self):
-        cf.CommonFunctions.setUpBase(self)
-
-    def test_LibreLogin(self):
+    def test_DriverLogin(self):
         cf.CommonFunctions.loginDriver(self,"apacheco412","password")
         cf.CommonFunctions.assertOnIdText(self,"driver_name", "Alejandro B.")
 
-    def tearDown(self):
-        cf.CommonFunctions.tearDownBase(self)
+    def test_DriverStartDay(self):
+        cf.CommonFunctions.clickOnId(self,"driver_start")
 
+
+    @classmethod
+    def tearDownClas(cls):
+        super(DriverTests, cls).tearDownClass()
+        cf.CommonFunctions.tearDownBase(self=DriverTests)
 
 
 #---START OF SCRIPT

@@ -17,7 +17,7 @@ class CommonFunctions(unittest.TestCase):
                 return True
             else:
                 return False
-
+    @staticmethod
     def setUpBase(self):
         sleep(5)
         chksession = CommonFunctions.check_socket("127.0.0.1",4723)
@@ -38,7 +38,7 @@ class CommonFunctions(unittest.TestCase):
             for proc in process.children(recursive=True):
                 proc.kill()
             process.kill()
-
+    @staticmethod
     def tearDownBase(self):
         sleep(5)
         self.driver.quit()
