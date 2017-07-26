@@ -1,19 +1,34 @@
-import os
-import unittest
-from appium import webdriver
-from time import sleep
 import subprocess
-from psutil import process_iter
-from signal import SIGTERM
+import unittest
+import os
+import signal
+import psutil
+from time import sleep
+from appium import webdriver
+import socket
+from contextlib import closing
+import cmd
+import sys
 
-class Common(unittest.TestCase):
+class CommonFunctions(unittest.TestCase):
 
     process = ""
 
+    def check_socket(host, port):
+        with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as sock:
+            if sock.connect_ex((host, port)) == 0:
+                return True
+            else:
+                return False
+
     def setUp(self):
         sleep(5)
-        self.process = subprocess.Popen("appium --session-override", shell=True)
+        chksession = CommonFunctions.check_socket("127.0.0.1",4723)
+        if chksession == False:
+            self.process = subprocess.Popen("appium --session-override", shell=True)
+            sleep(5)
         desired_caps = {}
+        desired_caps['newCommandTimeout'] = '999'
         desired_caps['platformName'] = 'Android'
         desired_caps['platformVersion'] = '5.1'
         desired_caps['deviceName'] = 'W808'
@@ -21,10 +36,16 @@ class Common(unittest.TestCase):
         desired_caps['appActivity'] = 'com.tenone.activity.SplashActivity'
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
 
+    def kill(proc_pid):
+            process = psutil.Process(proc_pid)
+            for proc in process.children(recursive=True):
+                proc.kill()
+            process.kill()
+
     def tearDown(self):
         sleep(5)
         self.driver.quit()
-        self.process.kill()
+        CommonFunctions.kill(self.process.pid)
 
     def clickOnId(self,id):
         self.driver.implicitly_wait(30)
@@ -43,8 +64,8 @@ class Common(unittest.TestCase):
         self.assertEqual(element.text, expValue)
 
     def loginDriver(self,userName,password):
-        Common.clickOnId(self, "drivermode")
-        Common.clickOnId(self, "button_no_pair")
-        Common.enterTextOnId(self, "input_libre_id", userName)
-        Common.enterTextOnId(self, "input_passwd", password)
-        Common.clickOnId(self, "login_button")
+        CommonFunctions.clickOnId(self, "drivermode")
+        CommonFunctions.clickOnId(self, "button_no_pair")
+        CommonFunctions.enterTextOnId(self, "input_libre_id", userName)
+        CommonFunctions.enterTextOnId(self, "input_passwd", password)
+        CommonFunctions.clickOnId(self, "login_button")

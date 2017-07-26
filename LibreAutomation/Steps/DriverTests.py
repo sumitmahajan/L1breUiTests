@@ -7,14 +7,14 @@ import LibreAutomation.Common.CommonFunctions as cf
 class DriverTests(unittest.TestCase):
 
     def setUp(self):
-        cf.Common.setUp(self)
+        cf.CommonFunctions.setUp(self)
 
     def test_LibreLogin(self):
-        cf.Common.loginDriver(self,"apacheco412","password")
-        cf.Common.assertOnIdText(self,"driver_name", "Alejandro B.")
+        cf.CommonFunctions.loginDriver(self,"apacheco412","password")
+        cf.CommonFunctions.assertOnIdText(self,"driver_name", "Alejandro B.")
 
     def tearDown(self):
-        cf.Common.tearDown(self)
+        cf.CommonFunctions.tearDown(self)
 
 
 
