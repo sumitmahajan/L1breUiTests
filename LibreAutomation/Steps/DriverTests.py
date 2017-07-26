@@ -17,7 +17,7 @@ class DriverTests(unittest.TestCase):
 
 
     @classmethod
-    def tearDownClas(cls):
+    def tearDownClass(cls):
         super(DriverTests, cls).tearDownClass()
         cf.CommonFunctions.tearDownBase(self=DriverTests)
 
