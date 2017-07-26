@@ -18,7 +18,6 @@ class DriverTests(unittest.TestCase):
 
 
 
-
 #---START OF SCRIPT
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(DriverTests)
