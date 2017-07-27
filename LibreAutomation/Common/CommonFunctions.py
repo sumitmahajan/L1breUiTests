@@ -5,6 +5,8 @@ from contextlib import closing
 from time import sleep
 import psutil
 from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
+from appium.webdriver.common.multi_action import MultiAction
 
 
 class CommonFunctions(unittest.TestCase):
@@ -19,11 +21,9 @@ class CommonFunctions(unittest.TestCase):
                 return False
     @staticmethod
     def setUpBase(self):
-        sleep(5)
         chksession = CommonFunctions.check_socket("127.0.0.1",4723)
         if chksession == False:
             self.process = subprocess.Popen("appium --session-override", shell=True)
-            sleep(5)
         desired_caps = {}
         desired_caps['newCommandTimeout'] = '999'
         desired_caps['platformName'] = 'Android'
@@ -66,3 +66,9 @@ class CommonFunctions(unittest.TestCase):
         CommonFunctions.enterTextOnId(self, "input_libre_id", userName)
         CommonFunctions.enterTextOnId(self, "input_passwd", password)
         CommonFunctions.clickOnId(self, "login_button")
+
+    def swipeRight(self,id):
+        sleep(5)
+        element = self.driver.find_element_by_id(id)
+        action = TouchAction(self.driver)
+        action.press(element).move_to(element, 300, 725).release().perform()

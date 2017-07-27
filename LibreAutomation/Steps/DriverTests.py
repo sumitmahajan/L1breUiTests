@@ -8,12 +8,18 @@ class DriverTests(unittest.TestCase):
         super(DriverTests, cls).setUpClass()
         cf.CommonFunctions.setUpBase(self=DriverTests)
 
-    def test_DriverLogin(self):
+    def test_1DriverLogin(self):
         cf.CommonFunctions.loginDriver(self,"apacheco412","password")
         cf.CommonFunctions.assertOnIdText(self,"driver_name", "Alejandro B.")
 
-    def test_DriverStartDay(self):
+    def test_2DriverStartDay(self):
         cf.CommonFunctions.clickOnId(self,"driver_start")
+
+    def test_3DriverBooked(self):
+        cf.CommonFunctions.clickOnId(self,"booked")
+
+    def test_4StartTrip(self):
+        cf.CommonFunctions.swipeRight(self,"starttrip")
 
 
     @classmethod
