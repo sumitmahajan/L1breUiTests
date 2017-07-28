@@ -67,8 +67,9 @@ class CommonFunctions(unittest.TestCase):
         CommonFunctions.enterTextOnId(self, "input_passwd", password)
         CommonFunctions.clickOnId(self, "login_button")
 
-    def swipeRight(self,id):
-        sleep(5)
-        element = self.driver.find_element_by_id(id)
+    def swipe(self,id1,id2):
+        self.driver.implicitly_wait(30)
+        el1 = self.driver.find_element_by_id(id1)
         action = TouchAction(self.driver)
-        action.press(element).move_to(element, 300, 725).release().perform()
+        el2 = self.driver.find_element_by_id(id2)
+        action.long_press(el1).move_to(el2).release().perform()

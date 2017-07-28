@@ -18,8 +18,20 @@ class DriverTests(unittest.TestCase):
     def test_3DriverBooked(self):
         cf.CommonFunctions.clickOnId(self,"booked")
 
-    def test_4StartTrip(self):
-        cf.CommonFunctions.swipeRight(self,"starttrip")
+    def test_4DriverStartTrip(self):
+        cf.CommonFunctions.swipe(self,"label_container","emergency_button_driver")
+
+    def test_5DriverEndTrip(self):
+        cf.CommonFunctions.swipe(self,"label_container","emergency_button_driver")
+
+    def test_6DriverFree(self):
+        cf.CommonFunctions.clickOnId(self,"ratepaid")
+
+    def test_7DriverBreak(self):
+        cf.CommonFunctions.clickOnId(self,"breakbutton")
+
+    def test_8DriverDisconnect(self):
+        cf.CommonFunctions.clickOnId(self,"disconnect")
 
 
     @classmethod
