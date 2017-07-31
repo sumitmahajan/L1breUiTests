@@ -7,6 +7,7 @@ import psutil
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
 from appium.webdriver.common.multi_action import MultiAction
+import pdb
 
 
 class CommonFunctions(unittest.TestCase):
@@ -73,3 +74,6 @@ class CommonFunctions(unittest.TestCase):
         action = TouchAction(self.driver)
         el2 = self.driver.find_element_by_id(id2)
         action.long_press(el1).move_to(el2).release().perform()
+
+    def setloc(self):
+        self.driver.set_location(19.68206097,-100.63900709,2098)
