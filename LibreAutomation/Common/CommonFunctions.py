@@ -76,4 +76,4 @@ class CommonFunctions(unittest.TestCase):
         action.long_press(el1).move_to(el2).release().perform()
 
     def setloc(self):
-        self.driver.set_location(19.68206097,-100.63900709,2098)
+        self.driver.set_location(30.257364, -97.806956, 0.0)

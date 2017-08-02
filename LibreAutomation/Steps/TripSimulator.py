@@ -12,7 +12,7 @@ class TripSimulator(unittest.TestCase):
         cf.CommonFunctions.setUpBase(self=TripSimulator)
 
     def DriverLogin(self):
-        cf.CommonFunctions.loginDriver(self,"rjimenez895","Oracle123")
+        cf.CommonFunctions.loginDriver(self,"apacheco412","password")
 
     def DriverStartDay(self):
         cf.CommonFunctions.clickOnId(self,"driver_start")
@@ -21,9 +21,10 @@ class TripSimulator(unittest.TestCase):
         cf.CommonFunctions.clickOnId(self,"booked")
 
     def DriverStartTrip(self):
+        cf.CommonFunctions.setloc(self)
         cf.CommonFunctions.swipe(self,"label_container","emergency_button_driver")
         cf.CommonFunctions.setloc(self)
-        sleep(randint(1, 300))
+        sleep(randint(1, 60))
 
 
     def DriverEndTrip(self):
