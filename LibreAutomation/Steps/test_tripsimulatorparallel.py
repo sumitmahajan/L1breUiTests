@@ -5,14 +5,14 @@ from random import randint
 from time import sleep
 
 
-class TripSimulator(unittest.TestCase):
+class TripSimulatorParallel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        super(TripSimulator, cls).setUpClass()
-        cf.CommonFunctions.setUpBase(self=TripSimulator)
+        super(TripSimulatorParallel, cls).setUpClass()
+        cf.CommonFunctions.setUpBaseParallel(self=TripSimulatorParallel)
 
     def DriverLogin(self):
-        cf.CommonFunctions.loginDriver(self,"apacheco412","password")
+        cf.CommonFunctions.loginDriver(self," jgonzalez986","password")
 
     def DriverStartDay(self):
         cf.CommonFunctions.clickOnId(self,"driver_start")
@@ -40,24 +40,24 @@ class TripSimulator(unittest.TestCase):
         cf.CommonFunctions.clickOnId(self,"disconnect")
 
     def test_TripSimulator(self):
-        TripSimulator.DriverLogin(self)
-        TripSimulator.DriverStartDay(self)
-        for i in range(20):
-            TripSimulator.DriverBooked(self)
-            TripSimulator.DriverStartTrip(self)
-            TripSimulator.DriverEndTrip(self)
-            TripSimulator.DriverFree(self)
-        TripSimulator.DriverBreak(self)
-        TripSimulator.DriverDisconnect(self)
+        TripSimulatorParallel.DriverLogin(self)
+        TripSimulatorParallel.DriverStartDay(self)
+        for i in range(200):
+            TripSimulatorParallel.DriverBooked(self)
+            TripSimulatorParallel.DriverStartTrip(self)
+            TripSimulatorParallel.DriverEndTrip(self)
+            TripSimulatorParallel.DriverFree(self)
+        TripSimulatorParallel.DriverBreak(self)
+        TripSimulatorParallel.DriverDisconnect(self)
 
 
     @classmethod
     def tearDownClass(cls):
-        super(TripSimulator, cls).tearDownClass()
-        cf.CommonFunctions.tearDownBase(self=TripSimulator)
+        super(TripSimulatorParallel, cls).tearDownClass()
+        cf.CommonFunctions.tearDownBase(self=TripSimulatorParallel)
 
 
 #---START OF SCRIPT
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TripSimulator)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TripSimulatorParallel)
     unittest.TextTestRunner(verbosity=2).run(suite)

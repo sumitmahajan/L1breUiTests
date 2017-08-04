@@ -24,7 +24,7 @@ class CommonFunctions(unittest.TestCase):
     def setUpBase(self):
         chksession = CommonFunctions.check_socket("127.0.0.1",4723)
         if chksession == False:
-            self.process = subprocess.Popen("appium --session-override", shell=True)
+            self.process = subprocess.Popen("appium -p 4723 -bp 4728 --chromedriver-port 9516 --session-override", shell=True)
         desired_caps = {}
         desired_caps['newCommandTimeout'] = '999'
         desired_caps['platformName'] = 'Android'
@@ -32,7 +32,22 @@ class CommonFunctions(unittest.TestCase):
         desired_caps['deviceName'] = 'W808'
         desired_caps['appPackage'] = 'com.tenone'
         desired_caps['appActivity'] = 'com.tenone.activity.SplashActivity'
+        desired_caps['autoAcceptAlerts'] = 'true'
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+    @staticmethod
+    def setUpBaseParallel(self):
+        chksession = CommonFunctions.check_socket("127.0.0.1",4723)
+        if chksession == False:
+            self.process = subprocess.Popen("appium -p 4725 -bp 4731 --chromedriver-port 9518 --session-override", shell=True)
+        desired_caps = {}
+        desired_caps['newCommandTimeout'] = '999'
+        desired_caps['platformName'] = 'Android'
+        desired_caps['platformVersion'] = '4.4.2'
+        desired_caps['deviceName'] = 'Users tablet2'
+        desired_caps['appPackage'] = 'com.tenone'
+        desired_caps['appActivity'] = 'com.tenone.activity.SplashActivity'
+        desired_caps['autoAcceptAlerts'] = 'true'
+        self.driver = webdriver.Remote('http://localhost:4725/wd/hub', desired_caps)
 
     def kill(proc_pid):
             process = psutil.Process(proc_pid)
