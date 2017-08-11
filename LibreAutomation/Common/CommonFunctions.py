@@ -1,4 +1,5 @@
 import socket
+import logging
 import subprocess
 import unittest
 from contextlib import closing
@@ -8,10 +9,14 @@ from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
 from appium.webdriver.common.multi_action import MultiAction
 import pdb
+from selenium.common.exceptions import NoSuchElementException
+from LibreAutomation.Common.Coords_Algorithm import Coords_Algorithm as ca
 
+logging.basicConfig(filename=
+                    "test.log"
+                    , level=logging.INFO)
 
 class CommonFunctions(unittest.TestCase):
-
     process = ""
 
     def check_socket(host, port):
@@ -82,6 +87,7 @@ class CommonFunctions(unittest.TestCase):
         CommonFunctions.enterTextOnId(self, "input_libre_id", userName)
         CommonFunctions.enterTextOnId(self, "input_passwd", password)
         CommonFunctions.clickOnId(self, "login_button")
+        CommonFunctions.bypass_wrong_password(self)
 
     def swipe(self,id1,id2):
         self.driver.implicitly_wait(30)
@@ -91,4 +97,16 @@ class CommonFunctions(unittest.TestCase):
         action.long_press(el1).move_to(el2).release().perform()
 
     def setloc(self):
-        self.driver.set_location(30.257364, -97.806956, 0.0)
+        self.driver.set_location(19.426094, -99.163648, 0.0)
+        sleep(5)
+
+    def setincloc(self,n):
+        self.driver.set_location(19.426094+n, -99.163648+n, 0.0)
+        sleep(1)
+
+    def bypass_wrong_password(self):
+        if self.driver.find_elements_by_id("ok_button"):
+            CommonFunctions.clickOnId(self, "ok_button")
+            CommonFunctions.clickOnId(self, "login_button")
+
+

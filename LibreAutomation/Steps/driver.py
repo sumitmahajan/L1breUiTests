@@ -1,6 +1,8 @@
 import unittest
 import LibreAutomation.Common.CommonFunctions as cf
 import pdb
+from time import sleep
+import logging
 
 
 class DriverTests(unittest.TestCase):
@@ -17,10 +19,15 @@ class DriverTests(unittest.TestCase):
         cf.CommonFunctions.clickOnId(self,"driver_start")
 
     def test_3DriverBooked(self):
+        cf.CommonFunctions.setloc(self)
         cf.CommonFunctions.clickOnId(self,"booked")
 
     def test_4DriverStartTrip(self):
         cf.CommonFunctions.swipe(self,"label_container","emergency_button_driver")
+        for i in range(50):
+            n = i
+            cf.CommonFunctions.setincloc(self, n)
+
 
     def test_5DriverEndTrip(self):
         cf.CommonFunctions.swipe(self,"label_container","emergency_button_driver")
